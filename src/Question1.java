@@ -11,6 +11,21 @@ public class Question1 {
      * of consecutive identical characters is "AAAAA".
      */
     private static void longestStreak(String str) {
-        // TODO Write code here
+        int max = 1;
+        String letter = "";
+
+        for(int b = 0; b < str.length()-1; b++){
+            int x = 1;
+            while(str.charAt(b) == str.charAt(b+1)) {
+                b++;
+                x++;
+            }
+            if(x > max) {
+                max = x;
+                letter = "" + str.charAt(b);
+            }
+        }
+        System.out.println(letter + " " + max);
+
     }
 }

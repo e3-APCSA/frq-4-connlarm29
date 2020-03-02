@@ -31,8 +31,15 @@ public class CoinGame {
      */
     public int getPlayer2Move(int round)
     {
-        int result  = 0;
-        /* TODO to be implemented in part (a) */
+        int result;
+
+        if(round % 3 == 0){
+            result = 3;
+        }else if(round % 2 == 0){
+            result = 2;
+        }else{
+            result = 1;
+        }
         return result;
     }
 
@@ -56,6 +63,39 @@ public class CoinGame {
      */
     public void playGame()
     {
-        /* TODO to be implemented in part (b) */
+       int round = 1;
+       int p1s = startingCoins;
+       int p2s = startingCoins;
+
+       while(round <= maxRounds) {
+           int p1move = getPlayer1Move();
+           int p2move = getPlayer2Move(round);
+
+           p1s -= p1move;
+           p2s -= p2move;
+
+           if (p1move == p2move) {
+               p2s++;
+           } else if (Math.abs(p1move - p2move) == 1) {
+               p2s++;
+           } else if (Math.abs(p1move - p2move) == 2) {
+               p1s += 2;
+           }
+           round++;
+       }
+       if(p1s == p2s) {
+           System.out.println("tie game");
+       }else if(p1s > p2s){
+           System.out.println("player 1 wins");
+       }else if(p1s < p2s){
+           System.out.println("player 2 wins");
+       }
     }
+
+
+    public static void main(String [] args){
+        CoinGame game = new CoinGame(3,5);
+        game.playGame();
+    }
+
 }
